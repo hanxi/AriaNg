@@ -83,6 +83,10 @@
                 templateUrl: 'views/status.html',
                 controller: 'Aria2StatusController'
             })
+            .when('/plugins/music', {
+                templateUrl: '../plugin/views/music.html',
+                controller: 'PluginMusicController'
+            })
             .otherwise({
                 redirectTo: '/downloading'
             });

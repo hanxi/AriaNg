@@ -14,7 +14,8 @@ gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
 gulp.task('lint', function () {
     return gulp.src([
-        'src/scripts/**/*.js'
+        'src/scripts/**/*.js',
+        'plugin/scripts/**/*.js',
     ]).pipe(reload({stream: true, once: true}))
         .pipe($.eslint.format())
         .pipe($.if(!browserSync.active, $.eslint.failAfterError()))
@@ -47,7 +48,8 @@ gulp.task('process-langs', ['prepare-langs'], function () {
 
 gulp.task('prepare-styles', function () {
     return gulp.src([
-        'src/styles/**/*.css'
+        'src/styles/**/*.css',
+        'plugin/styles/**/*.css'
     ]).pipe($.autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR']}))
         .pipe(gulp.dest('.tmp/styles'))
         .pipe(reload({stream: true}));
@@ -55,7 +57,8 @@ gulp.task('prepare-styles', function () {
 
 gulp.task('prepare-scripts', function () {
     return gulp.src([
-        'src/scripts/**/*.js'
+        'src/scripts/**/*.js',
+        'plugin/scripts/**/*.js'
     ]).pipe($.plumber())
         .pipe($.injectVersion({replace: '${ARIANG_VERSION}'}))
         .pipe($.replace(/\${ARIANG_BUILD_COMMIT}/g, tryFn(git.short) || 'Local'))
@@ -65,7 +68,8 @@ gulp.task('prepare-scripts', function () {
 
 gulp.task('prepare-views', function () {
     return gulp.src([
-        'src/views/**/*.html'
+        'src/views/**/*.html',
+        'plugin/views/**/*.html'
     ]).pipe($.htmlmin({collapseWhitespace: true}))
         .pipe($.angularTemplatecache({module: 'ariaNg', filename: 'views/templates.js', root: 'views/'}))
         .pipe(gulp.dest('.tmp/scripts'));
