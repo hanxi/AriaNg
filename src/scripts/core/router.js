@@ -84,7 +84,7 @@
                 controller: 'Aria2StatusController'
             })
             .when('/plugins/music', {
-                templateUrl: '../plugin/views/music.html',
+                templateUrl: 'views/music.html',
                 controller: 'PluginMusicController'
             })
             .otherwise({
