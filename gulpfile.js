@@ -62,6 +62,7 @@ gulp.task('prepare-scripts', function () {
     ]).pipe($.plumber())
         .pipe($.injectVersion({replace: '${ARIANG_VERSION}'}))
         .pipe($.replace(/\${ARIANG_BUILD_COMMIT}/g, tryFn(git.short) || 'Local'))
+        .pipe($.replace(/\.\.\/plugin\//g, ''))
         .pipe(gulp.dest('.tmp/scripts'))
         .pipe(reload({stream: true}));
 });
